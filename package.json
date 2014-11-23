@@ -23,12 +23,15 @@
   },
   "homepage": "https://github.com/wix/react-templates",
   "dependencies": {
+    "browserify-zepto": "^1.1.4",
     "chalk": "^0.5.1",
     "cheerio": "^0.18.0",
     "escodegen": "^1.4.1",
     "esprima": "^1.2.2",
+    "jquery-browserify": "^1.8.1",
     "lodash": "^2.4.1",
-    "react": "^0.12.0"
+    "react": "^0.12.0",
+    "zepto": "^0.0.4"
   },
   "devDependencies": {
     "codemirror": "^4.7.0",

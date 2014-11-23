@@ -1,0 +1,16 @@
+<!doctype rt>
+<div>
+    Have {_.filter(this.state.todos, {done:true}).length} todos done,
+    and {_.filter(this.state.todos, {done:false}).length} not done
+    <br/>
+    <div rt-repeat="todo in this.state.todos" key="{todo.key}">
+        <button onClick="()=>this.remove(todo)">x</button>
+        <input type="checkbox" checked="{todo.done}" onChange="()=>this.toggleChecked(todoIndex)">
+        <span style="text-decoration: {todo.done ? 'line-through': 'none'}">{todo.value}</span>
+    </div>
+    <form onSubmit="(e)=>e.preventDefault(); this.add()">
+        <input key="myinput" ref="myinput" type="text" valueLink="{this.linkState('edited')}">
+        <button type="submit">Add</button><br/>
+    </form>
+    <button onClick="(e)=>e.preventDefault(); this.clearDone()">Clear done</button>
+</div>

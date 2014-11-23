@@ -42,7 +42,8 @@ module.exports = function (grunt) {
             },
             pg: {
                 files: {
-                    'playground/main.browser2.js': ['playground/main.js']
+                    'playground/main.browser2.js': ['playground/main.js'],
+                    'linkrt/linkrt.browser.js': ['linkrt/linkrt.js']
                 }
             }
         }
