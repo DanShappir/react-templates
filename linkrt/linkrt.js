@@ -39,7 +39,14 @@ $(function () {
     }
 
     function generateProps(props) {
-        return eval('(' + props + ')');
+        if (props) {
+            props = props.trim();
+            if (props) {
+                /*eslint no-eval:0*/
+                props = eval(props[0] === '{' ? ('(' + props + ')') : ('({' + props + '})'));
+            }
+        }
+        return props;
     }
 
     function process(rt, spec, $container, name, props, base) {

@@ -17,3 +17,5 @@ npm-debug.log
 /bower_components/*
 
 linkrt/linkrt.browser.js
+playground/main.browser2.js
+web
