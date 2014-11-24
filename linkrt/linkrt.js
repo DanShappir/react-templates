@@ -58,7 +58,8 @@ $(function () {
                 var cls = generateReactClass(spec, func);
                 if ($container) {
                     props = generateProps(props);
-                    React.render(React.createElement(cls, props), $container[0]);
+                    var reactComponent = React.render(React.createElement(cls, props), $container[0]);
+                    $container.trigger('linkRtRender', [reactComponent]);
                 }
                 if (name) {
                     sync(name).resolve(React.createFactory(cls));
