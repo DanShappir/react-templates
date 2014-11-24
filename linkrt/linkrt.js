@@ -23,12 +23,14 @@ $(function () {
         return reactTemplates.convertTemplateToReact(html.trim().replace(/\r/g, ''));
     }
 
-    function generateTemplateFunction(code, callback) {
-        function define(dep, impl) {
-            $.when.apply(null, _.map(dep, sync)).then(impl).done(callback);
-        }
-        /*eslint no-eval:0*/
-        eval(code);
+    function generateTemplateFunction(code) {
+        return $.Deferred(function (deferred) {
+            function define(dep, impl) {
+                $.when.apply(null, _.map(dep, sync)).then(impl).done(deferred.resolve);
+            }
+            /*eslint no-eval:0*/
+            eval(code);
+        });
     }
 
     function generateReactClass(spec, render) {
@@ -52,10 +54,10 @@ $(function () {
     function process(rt, spec, $container, name, props, base) {
         try {
             var source = generateTemplateSource(rt);
-            generateTemplateFunction(source, function (func) {
+            generateTemplateFunction(source).done(function (func) {
                 var cls = generateReactClass(spec, func);
-                props = generateProps(props);
                 if ($container) {
+                    props = generateProps(props);
                     React.render(React.createElement(cls, props), $container[0]);
                 }
                 if (name) {
@@ -77,7 +79,7 @@ $(function () {
         if (name) {
             $this.remove();
         } else {
-            $container = $('<span>').replaceAll($this);
+            $container = $('<span class="link-rt-container"></span>').replaceAll($this);
         }
 
         $.when(
